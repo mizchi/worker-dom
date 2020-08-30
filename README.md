@@ -1,3 +1,50 @@
+# @mizchi/worker-dom
+
+worker-dom for your own web-worker.
+
+```
+npm install @mizchi/worker-dom --save
+```
+
+## Why
+
+- Add `attachWorker(element: HTMLElement, worker: Worker)` on main-thread
+- Add `ready` on worker to connect `attachWorker`.
+
+## Example with worker-plugin
+
+```js
+// webpack.config.js
+const WorkerPlugin = require("worker-plugin");
+module.exports = {
+  // ...
+  plugins: [new WorkerPlugin()]
+}
+```
+
+```js
+// worker.js
+import { ready } from "@mizchi/worker-dom/dist/lib/worker";
+
+ready.then(() =>{ 
+  // should keep same content with main-thread on init.
+  document.body.firstChild.textContent = 'hello from worker mutate';
+});
+```
+
+```js
+// main.js
+import { attachWorker } from "@mizchi/worker-dom/dist/lib/main";
+
+// Create worker by your own way
+const worker = new Worker("./worker.js", { type: "module" });
+
+// attach worker to dom
+attachWorker(document.querySelector('#root'), worker);
+```
+
+---
+
 # WorkerDOM
 
 An in-progress implementation of the DOM API intended to run within a Web Worker. 

@@ -1,5 +1,5 @@
 {
-  "name": "@ampproject/worker-dom",
+  "name": "@mizchi/worker-dom",
   "version": "0.25.1",
   "description": "A facsimile of a modern DOM implementation intended to run in a Web Worker.",
   "main": "dist/main",
